@@ -2,7 +2,9 @@ target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
+!**
 pom.xml
+!**src/main/resources/hibernate.cfg.xml
 ### IntelliJ IDEA ###
 .idea/modules.xml
 .idea/jarRepositories.xml
