@@ -12,7 +12,7 @@ public class Main {
     public static void main(String[] args) {
         Student st = new Student();
         st.setRollNo(13);
-        st.setsAge(22);
+        st.setsAge(28);
         st.setsName("Harry12 ");
 
         Student s2 = null;
@@ -25,10 +25,15 @@ public class Main {
 
         Session session = sf.openSession();
 
-//        Transaction transaction = session.beginTransaction();
-        s2 = session.get(Student.class, 12);
+        Student s5 = session.get(Student.class, 12);
 
-        session.save(st);
+        Transaction transaction = session.beginTransaction();
+
+        session.merge(st);
+        session.remove(s5);
+
+        transaction.commit();
+
 
 //        transaction.commit();
         System.out.println(st);
