@@ -10,35 +10,21 @@ import org.hibernate.internal.build.AllowSysOut;
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
-        Student st = new Student();
-        st.setRollNo(13);
-        st.setsAge(28);
-        st.setsName("Harry12 ");
 
-        Student s2 = null;
+        Alien a1 = new Alien();
+        a1.setAid(101);
+        a1.setAname("Yash");
+        a1.setTech("Java");
 
-//        Configuration cfg = new Configuration();
-//        cfg.addAnnotatedClass(org.example.Student.class);
-//        cfg.configure();
-//        SessionFactory sf = cfg.buildSessionFactory();
-        SessionFactory sf = new Configuration().addAnnotatedClass(Student.class).configure().buildSessionFactory();
+        SessionFactory sf = new Configuration().addAnnotatedClass(Alien.class).configure().buildSessionFactory();
 
         Session session = sf.openSession();
 
-        Student s5 = session.get(Student.class, 12);
-
         Transaction transaction = session.beginTransaction();
 
-        session.merge(st);
-        session.remove(s5);
+        session.persist(a1);
 
         transaction.commit();
-
-
-//        transaction.commit();
-        System.out.println(st);
-
-        System.out.println(s2);
 
         session.close();
         sf.close();
