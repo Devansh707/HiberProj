@@ -1,9 +1,6 @@
 package org.example;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity(name = "alien")
 public class Alien {
@@ -13,6 +10,7 @@ public class Alien {
     @Column(name = "alien_name")
     private String aname;
     private String tech;
+    @OneToOne
     private Laptop laptop;
 
     public int getAid() {

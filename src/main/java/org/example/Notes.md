@@ -21,5 +21,14 @@ Key Features of Hibernate
 7. **Annotations and XML Configuration**: Hibernate allows configuration through both annotations in the Java code and XML files, providing flexibility in how mappings are defined.
 8. **Integration with Spring**: Hibernate can be easily integrated with the Spring Framework, allowing developers to leverage Spring's features alongside Hibernate's ORM capabilities.
 9. **Support for Inheritance**: Hibernate supports various inheritance mapping strategies, allowing developers to model complex class hierarchies in the database.
-10. **Criteria API**: Hibernate provides a Criteria API for building type-safe queries programmatically, which can be more flexible than HQL for dynamic query construction.
-11. 
+10. **Criteria API**: Hibernate provides a Criteria API for building type-safe queries programmatically, which can be more flexible than HQL for dynamic query construction
+
+
+Embedded Databases
+----------------
+Embedded databases are lightweight database systems that run within the application process. They are often used for development, testing, or small-scale applications.
+
+Making Hibernate Work with Embedded Databases
+Using Laptop class embedding with Alien class as an embedded object.
+1. **Define the Embedded Class**: Create a class that represents the embedded object and annotate
+using this we can embed the object in another entity. and use it as a field in the main entity class.

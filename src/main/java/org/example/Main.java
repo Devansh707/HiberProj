@@ -13,6 +13,7 @@ public class Main {
 
 
         Laptop l1 = new Laptop();
+        l1.setLid(01);
         l1.setBrand("Dell");
         l1.setModel("Inspiron");
         l1.setRam(16);
@@ -23,12 +24,15 @@ public class Main {
         a1.setTech("Java");
         a1.setLaptop(l1);
 
-        SessionFactory sf = new Configuration().addAnnotatedClass(Alien.class).configure().buildSessionFactory();
+        SessionFactory sf = new Configuration().addAnnotatedClass(Alien.class)
+                .addAnnotatedClass(Laptop.class)
+                .configure().buildSessionFactory();
 
         Session session = sf.openSession();
 
         Transaction transaction = session.beginTransaction();
 
+        session.persist(l1);
         session.persist(a1);
 
         transaction.commit();
