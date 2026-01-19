@@ -32,3 +32,15 @@ Making Hibernate Work with Embedded Databases
 Using Laptop class embedding with Alien class as an embedded object.
 1. **Define the Embedded Class**: Create a class that represents the embedded object and annotate
 using this we can embed the object in another entity. and use it as a field in the main entity class.
+
+OneToMany Relationships
+----------------
+OneToMany relationships in ORM represent a relationship where one entity is associated with multiple instances of another
+As an Alien can have multiple Laptops. 
+1. **Define the Relationship**: In the main entity class, use the @OneToMany annotation to define the relationship with the related entity class.
+2. Create a Alien reference in Laptop class using @ManyToOne annotation to establish the bidirectional relationship.
+3. This will create a foreign key in the Laptop table referencing the Alien table. relationship. For example, one alien can have multiple laptops.
+from Laptop perspective 1 alien can have multiple laptops and from Alien perspective one alien can have multiple laptops.
+Both the sides(Alien and Laptop) should be aware of each other to maintain the relationship properly. Both are creating tables in the database with foreign key constraints.
+4. To prevent separate tables for the relationship, use the mappedBy attribute in the @OneToMany annotation to indicate that the relationship is managed by the other entity.
+Laptop class will have the foreign key column referencing the Alien table. So no separate table will be created for the relationship. So in the Alien class we will use @OneToMany(mappedBy="alien") annotation to indicate that the relationship is managed by the alien field in the Laptop class.

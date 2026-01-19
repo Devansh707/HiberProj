@@ -6,6 +6,8 @@ import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.internal.build.AllowSysOut;
 
+import java.util.Arrays;
+
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
@@ -18,11 +20,20 @@ public class Main {
         l1.setModel("Inspiron");
         l1.setRam(16);
 
+        Laptop l2 = new Laptop();
+        l2.setLid(02);
+        l2.setBrand("Apple");
+        l2.setModel("MacBook Pro");
+        l2.setRam(32);
+
         Alien a1 = new Alien();
         a1.setAid(101);
         a1.setAname("Yash");
         a1.setTech("Java");
-        a1.setLaptop(l1);
+        a1.setLaptops(Arrays.asList(l1, l2));
+
+        l1.setAlien(a1);
+        l2.setAlien(a1);
 
         SessionFactory sf = new Configuration().addAnnotatedClass(Alien.class)
                 .addAnnotatedClass(Laptop.class)
@@ -33,6 +44,7 @@ public class Main {
         Transaction transaction = session.beginTransaction();
 
         session.persist(l1);
+        session.persist(l2);
         session.persist(a1);
 
         transaction.commit();
