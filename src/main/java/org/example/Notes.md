@@ -54,3 +54,22 @@ Both Alien and Laptop classes should be aware of each other to maintain the rela
 To prevent separate join table creation, use the mappedBy attribute in one of the entity classes to indicate that the relationship is managed by the other entity.
 In the laptop class we will use @ManyToMany(mappedBy="laptops") annotation to indicate that the relationship is managed by the laptops field in the Alien class. the @Embeddable annotation.
 
+
+Hibernate Eager and Lazy Fetching
+----------------
+Eager and Lazy fetching are strategies used by Hibernate to load related entities from the database.
+In Hibernate we need caching to improve performance by reducing database access. Hibernate provides two types of caching: first-level cache and second-level cache.
+When we fetch an entity in same session, Hibernate first checks the first-level cache (session cache) to see if the entity is already loaded. If it is, Hibernate returns the entity from the cache instead of querying the database again.
+If the entity is not found in the first-level cache, Hibernate queries the database to load the entity and stores it in the first-level cache for future use.
+First-level cache is enabled by default and is specific to a Hibernate session. Each session has its own first-level cache, and entities loaded in one session are not visible in another session.
+Second-level cache is an optional cache that can be configured to store entities across multiple sessions. It is shared among all sessions and can improve performance by reducing database access for frequently accessed entities.
+
+To make multiple sessions  should share the same data, then we need to enable second-level cache in Hibernate configuration and annotate the entity classes with @Cache annotation to specify the caching strategy.
+
+By Default, Hibernate uses Lazy fetching for OneToMany and ManyToMany relationships. This means that related entities are not loaded from the database until they are accessed in the code.
+For example, when we load an Alien entity that has a OneToMany relationship with Laptop entities, the Laptop entities are not loaded from the database until we access the laptops field in the Alien entity.
+Eager fetching, on the other hand, loads related entities from the database immediately when the main entity is loaded.
+To change the fetching strategy from Lazy to Eager, we can use the fetch attribute in the relationship annotation.
+For example, to change the fetching strategy of the laptops field in the Alien class to Eager, we can use the following annotation:
+```java
+@OneToMany(fetch = FetchType.EAGER, mappedBy = "alien")

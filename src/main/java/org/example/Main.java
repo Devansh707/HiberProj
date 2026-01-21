@@ -22,13 +22,9 @@ public class Main {
         Alien a3 = makeAlien(103, "Alice", "C++");
 
         a1.setLaptops(Arrays.asList(l1, l2));
-        a2.setLaptops(Arrays.asList(l2, l3));
-        a3.setLaptops(Arrays.asList(l1, l4));
+        a2.setLaptops(Arrays.asList(l3));
+        a3.setLaptops(Arrays.asList(l4));
 
-        l1.setAliens(Arrays.asList(a1, a2));
-        l2.setAliens(Arrays.asList(a1, a3));
-        l3.setAliens(Arrays.asList(a2));
-        l4.setAliens(Arrays.asList(a3));
 
         SessionFactory sf = new Configuration().addAnnotatedClass(Alien.class)
                 .addAnnotatedClass(Laptop.class)
@@ -53,6 +49,12 @@ public class Main {
         System.out.println("Retrieved Alien: " + retrievedAlien);
 
         session.close();
+
+        Session session1 = sf.openSession();
+        Alien retrievedAlien1 = session1.find(Alien.class, 102);
+        System.out.println("Retrieved Alien: " + retrievedAlien1);
+        session1.close();
+
         sf.close();
     }
     public static Alien makeAlien(int id, String name, String tech) {
