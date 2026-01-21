@@ -44,3 +44,13 @@ from Laptop perspective 1 alien can have multiple laptops and from Alien perspec
 Both the sides(Alien and Laptop) should be aware of each other to maintain the relationship properly. Both are creating tables in the database with foreign key constraints.
 4. To prevent separate tables for the relationship, use the mappedBy attribute in the @OneToMany annotation to indicate that the relationship is managed by the other entity.
 Laptop class will have the foreign key column referencing the Alien table. So no separate table will be created for the relationship. So in the Alien class we will use @OneToMany(mappedBy="alien") annotation to indicate that the relationship is managed by the alien field in the Laptop class.
+
+ManyToMany Relationships
+----------------
+ManyToMany relationships in ORM represent a relationship where multiple instances of one entity are associated with multiple instances of another entity.
+For example, multiple aliens can have multiple laptops and multiple laptops can be associated with multiple aliens.
+
+Both Alien and Laptop classes should be aware of each other to maintain the relationship properly. If we don't use mappedBy attribute in either side, Hibernate will create a separate join table to manage the relationship.
+To prevent separate join table creation, use the mappedBy attribute in one of the entity classes to indicate that the relationship is managed by the other entity.
+In the laptop class we will use @ManyToMany(mappedBy="laptops") annotation to indicate that the relationship is managed by the laptops field in the Alien class. the @Embeddable annotation.
+

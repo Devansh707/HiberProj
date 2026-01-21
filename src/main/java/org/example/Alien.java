@@ -3,7 +3,7 @@ package org.example;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.ManyToMany;
 
 import java.util.List;
 
@@ -15,7 +15,7 @@ public class Alien {
     @Column(name = "alien_name")
     private String aname;
     private String tech;
-    @OneToMany(mappedBy = "alien")
+    @ManyToMany
     private List<Laptop> laptops;
 
     public int getAid() {
