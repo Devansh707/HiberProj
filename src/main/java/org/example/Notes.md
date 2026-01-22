@@ -91,3 +91,39 @@ Hibernate Caching - Level 2 Cache
 Level 2 caching in Hibernate, also known as the session factory-level cache, is an optional caching mechanism that allows entities to be cached across multiple sessions. Here are some key points to understand about it:
 Optional Configuration: Unlike Level 1 cache, Level 2 cache is not enabled by default. You need to explicitly configure it in your Hibernate settings and choose a caching provider (like Ehcache, Infinispan, etc.) to manage the cache.
 Shared Across Sessions: Level 2 cache is shared among all sessions created by the same session factory. This means that entities cached in Level 2 cache can be accessed by different sessions, improving performance for frequently accessed data.
+
+
+HQL - Hibernate Query Language
+----------------
+HQL (Hibernate Query Language) is an object-oriented query language used in Hibernate to perform database operations. It is similar to SQL but operates on the entity objects rather than database tables.
+Key Features of HQL
+1. **Object-Oriented**: HQL allows developers to write queries using object-oriented syntax, making it easier to work with entities and their relationships.
+2. **Database Independence**: HQL is database-independent, meaning that the same HQL query can be used with different database systems without modification.
+3. **Supports Joins**: HQL supports various types of joins (inner join, left join, right join) to retrieve related entities.
+4. **Supports Aggregate Functions**: HQL supports aggregate functions like COUNT, SUM, AVG, MAX, and MIN to perform calculations on entity attributes.
+5. **Supports Subqueries**: HQL allows the use of subqueries to perform complex queries.
+6. **Parameter Binding**: HQL supports parameter binding to prevent SQL injection attacks and improve query performance.
+7. **Pagination**: HQL supports pagination to retrieve a subset of results from a large dataset.
+Example HQL Query
+```java
+String hql = "FROM Alien WHERE alienName = :name";
+Query query = session.createQuery(hql);
+query.setParameter("name", "Zorg");
+List<Alien> aliens = query.list();
+``` 
+In this example, we are retrieving all Alien entities where the alienName attribute matches the specified name parameter.
+
+Conclusion
+----------------
+HQL, or Hibernate Query Language, is a powerful query language provided by Hibernate that allows you to interact with the database in an object-oriented manner. 
+Here’s a brief introduction to HQL:Derived from SQL: HQL is somewhat similar to SQL (Structured Query Language), but instead of dealing with database tables and columns, it operates on the entities and their properties in your Java application. 
+If you already understand basic SQL, you’ll find transitioning to HQL quite manageable.
+Object-Oriented: In HQL, you perform queries using the names of entity classes instead of actual database tables. 
+For example, if you have an entity called Student, your queries will reference Student rather than a students table. Similarly, you refer to object properties rather than database columns.
+CRUD Operations: It allows for typical CRUD (Create, Read, Update, Delete) operations. 
+You can use HQL to insert new records, select records from the database, update existing records, and delete records.
+Flexibility: HQL supports complex queries that can include joins, filtering, and sorting. This makes it a versatile choice for querying your database through Hibernate.
+Integration with ORM: HQL helps bridge the gap between the object-oriented programming paradigm of Java and the relational database world. 
+This way, developers can work with Java objects, while Hibernate manages the underlying database interactions seamlessly.
+
+In summary, HQL simplifies database operations by allowing developers to think in terms of Java objects and entities, leveraging Hibernate's ORM capabilities
