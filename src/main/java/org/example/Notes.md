@@ -73,3 +73,21 @@ To change the fetching strategy from Lazy to Eager, we can use the fetch attribu
 For example, to change the fetching strategy of the laptops field in the Alien class to Eager, we can use the following annotation:
 ```java
 @OneToMany(fetch = FetchType.EAGER, mappedBy = "alien")
+
+```
+
+Hibernate Caching - Level 1 Cache
+----------------   
+
+Level 1 caching in Hibernate, also known as the session-level cache, is a mechanism that stores entities loaded during a particular session. Here are some key points to understand about it:
+Automatic Activation: Level 1 cache is always enabled by default in Hibernate, meaning that once an entity is loaded within a session, it is stored in the cache and will not repeatedly hit the database for the same entity until the session is closed.
+Limited Scope: The cache is limited to the current session. If you create a new session, it will not have access to the entities stored in Level 1 cache from the previous session. This means that two different sessions cannot share data.
+Data Freshness: If you need to ensure that your application is working with fresh data from the database, you can use the session.refresh(entity) method to reload the entity from the database, bypassing the cached version.
+Resource Considerations: While caching improves performance by reducing database access, it also consumes memory. Therefore, it's important to consider when to use caching based on the dynamics of your data.
+In contrast, Level 2 caching is optional and requires additional configuration. It allows sharing cached data across different sessions and involves external caching libraries like Ehcache or Caffeine.
+
+Hibernate Caching - Level 2 Cache
+----------------
+Level 2 caching in Hibernate, also known as the session factory-level cache, is an optional caching mechanism that allows entities to be cached across multiple sessions. Here are some key points to understand about it:
+Optional Configuration: Unlike Level 1 cache, Level 2 cache is not enabled by default. You need to explicitly configure it in your Hibernate settings and choose a caching provider (like Ehcache, Infinispan, etc.) to manage the cache.
+Shared Across Sessions: Level 2 cache is shared among all sessions created by the same session factory. This means that entities cached in Level 2 cache can be accessed by different sessions, improving performance for frequently accessed data.
