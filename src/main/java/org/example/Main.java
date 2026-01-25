@@ -27,14 +27,38 @@ public class Main {
         // HQL -> FROM Laptop WHERE ram = 32
 
 //        Query query = session.createQuery("FROM Laptop");
-        Query query = session.createQuery("FROM Laptop WHERE ram = 32");
-        List<Laptop> laptops = query.getResultList();
+//        Query query = session.createQuery("FROM Laptop WHERE ram = 32");
+        Query query = session.createQuery("FROM Laptop WHERE  brand Like 'Asus'");
+
+        String brand = "Asus";
+        Query query1 = session.createQuery("FROM Laptop WHERE brand = ?1"); // passing external parameter to the query
+        query1.setParameter(1, brand);
+
+        List<Laptop> laptops = query1.getResultList();
 
         System.out.println("All Laptops: ");
         for(Laptop l : laptops) {
             System.out.println(l);
         }
 
+//        fetching only specific columns -> fetch model names of laptops having brand = 'Asus'
+        Query query2 = session.createQuery("select model from Laptop where  brand = ?1");
+        query2.setParameter(1, brand);
+
+        List<String> models = query2.getResultList();
+        System.out.println("Models of laptops having brand Asus: ");
+        for(String m : models) {
+            System.out.println(m);
+        }
+
+//        Fetching 2 columns -> brand and model of laptops
+        Query query3 = session.createQuery("select brand, model from Laptop where  brand = ?1");
+        query3.setParameter(1, brand);
+        List<Object[]> list = query3.getResultList();
+        System.out.println("Brand and Model of laptops having brand Asus: ");
+        for(Object[] arr : list) {
+            System.out.println(Arrays.toString(arr));
+        }
 
         Laptop l1 = session.get(Laptop.class, 5); // fetching laptop with lid = 5
         System.out.println("Laptop fetched: " + l1);
