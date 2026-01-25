@@ -127,3 +127,6 @@ Integration with ORM: HQL helps bridge the gap between the object-oriented progr
 This way, developers can work with Java objects, while Hibernate manages the underlying database interactions seamlessly.
 
 In summary, HQL simplifies database operations by allowing developers to think in terms of Java objects and entities, leveraging Hibernate's ORM capabilities
+
+
+For fetching data from the DB, we don't need Transaction. But for saving or updating data we need Transaction.
